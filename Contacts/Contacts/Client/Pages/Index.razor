@@ -1,0 +1,93 @@
+﻿@page "/"
+@using Contacts.Shared;
+@inject HttpClient Http;
+@inject NavigationManager UriHelper;
+
+<label for="Search"></label>
+<input id="Search" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="Search by FirstName, LastName or Email"/>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Is Married
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody id="results">
+        @if(AllContacts.Count > 0){
+            foreach (var result in AllContacts)
+            {
+                <tr>
+                    <td>@result.FirstName</td>
+                    <td>@result.LastName</td>
+                    <td>@result.Email</td>
+                    <td>@result.Title</td>
+                    <td>@result.Description</td>
+                    <td>@result.DateOfBirth.LocalDateTime.ToShortDateString()</td>
+                    <td>@((bool)result.MarriageStatus ? "Yes" : "No")</td>
+                    <td>
+                        <a @onclick="() => NavigateToEdit(result.Id)" class="btn btn-success">Edit</a>
+                        <button class="btn btn-danger" @onclick="() => DeleteContact(result.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="8">No Results</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    public string SearchTerm { get; set; } = string.Empty;
+    public List<Contact> AllContacts { get; set; } = new();
+    protected override async Task OnInitializedAsync()
+    {
+        AllContacts = await Http.GetFromJsonAsync<List<Contact>>("/contacts");
+    }
+    private async Task Search()
+    {
+        if (!string.IsNullOrEmpty(SearchTerm))
+        {
+            AllContacts = await Http.GetFromJsonAsync<List<Contact>>($"/search-contact/{SearchTerm}");
+        }
+        else{
+            AllContacts = await Http.GetFromJsonAsync<List<Contact>>("/contacts");
+        }
+    }
+    private async Task DeleteContact(Guid id)
+    {
+        string stringId = id.ToString();
+        await Http.DeleteAsync($"/delete-contact/{stringId}");
+        AllContacts = await Http.GetFromJsonAsync<List<Contact>>("/contacts");
+    }
+    private void NavigateToEdit(Guid id)
+    {
+        string stringId = id.ToString();
+        UriHelper.NavigateTo($"/Edit/{stringId}");
+    }
+}

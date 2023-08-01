@@ -1,0 +1,85 @@
+﻿@page "/create"
+@using Contacts.Shared;
+@using Microsoft.AspNet.Identity;
+@inject HttpClient Http;
+@inject NavigationManager UriHelper;
+
+
+
+<div class="row">
+    <h1 class="text-center">New Contact</h1>
+    <div class="col-md-6 offset-md-3">
+        <EditForm Model="@NewContact" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="mb-3">
+                <label class="form-label" for="FirstName">First Name</label>
+                <InputText class="form-control" @bind-Value="NewContact.FirstName" id="FirstName"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="LastName">Last Name</label>
+                <InputText class="form-control" @bind-Value="NewContact.LastName" id="LastName"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Email">Email</label>
+                <InputText class="form-control" type="email" @bind-Value="NewContact.Email" id="Email"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Title">Title</label>
+                <InputSelect @bind-Value="NewContact.Title" id="Title" class="form-select">
+                    <option selected>Select a title</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Dr">Dr</option>
+                    <option value="Prof">Prof</option>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Description">Description</label>
+                <InputTextArea class="form-control" @bind-Value="NewContact.Description" id="Description"></InputTextArea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="DateOfBirth">Date of Birth</label>
+                <InputDate class="form-control" @bind-Value="NewContact.DateOfBirth" id="DateOfBirth"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="MarriageStatus">Are you Married?</label>
+                <InputSelect @bind-Value="NewContact.MarriageStatus" id="MarriageStatus" class="form-select">
+                    <option selected>Select a choice</option>
+                    <option value=true>Yes</option>
+                    <option value=false>No</option>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Username">Username</label>
+                <input class="form-control" type="text" @bind-value="NewContact.Username" id="Username" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Password">Password</label>
+                <InputText class="form-control" type="password" @bind-Value="NewContact.Password" id="Password"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Roles">Choose Role</label>
+                <InputSelect @bind-Value="NewContact.Roles" id="Roles" class="form-select">
+                    <option selected>Select a choice</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success mt-3">Add Contact</button>
+            </div>
+        </EditForm>
+
+    </div>
+</div>
+
+@code {
+    public Contact NewContact { set; get; }
+    private async Task HandleValidSubmit()
+    {
+        await Http.PostAsJsonAsync<Contact>("/new-contact", NewContact);
+        UriHelper.NavigateTo("/");
+    }
+}

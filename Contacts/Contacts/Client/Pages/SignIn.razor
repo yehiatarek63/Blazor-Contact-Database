@@ -1,0 +1,30 @@
+﻿@page "/SignIn"
+@using Contacts.Shared;
+@inject HttpClient Http;
+
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <h1 class="card-img-top d-flex justify-content-center pt-3">Sign In</h1>
+                <div class="card-body">
+                    <EditForm>
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="mb-3">
+                            <label class="form-label" for="Username">Username</label>
+                            <InputText class="form-control" type="text"/>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="Password">Password</label>
+                            <InputText class="form-control" type="password"/>
+                        </div>
+                        <button class="btn btn-success d-flex justify-content-center">Login</button>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
