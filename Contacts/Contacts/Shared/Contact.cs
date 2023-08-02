@@ -19,12 +19,6 @@ public class Contact
     public DateTimeOffset DateOfBirth { get; set; }
     [Required]
     public bool? MarriageStatus { get; set; }
-    [Required]
-    public string? Username { get; set; }
-    [Required]
-    public string? Password { get; set; }
-    [Required]
-    public RoleState? Roles { get; set; }
 }
 public enum TitleState
 {
@@ -33,10 +27,4 @@ public enum TitleState
     Miss,
     Dr,
     Prof
-}
-
-public enum RoleState
-{
-    User,
-    Admin
 }

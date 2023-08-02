@@ -7,15 +7,13 @@ namespace Contacts.Server.Repositories;
 public class ContactRepository : IContactRepository
 {
     private readonly EdgeDBClient _client;
-    private readonly IPasswordHasher _passwordHasher;
-    public ContactRepository(EdgeDBClient client, IPasswordHasher passwordHasher)
+    public ContactRepository(EdgeDBClient client)
     {
         _client = client;
-        _passwordHasher = passwordHasher;
     }
     public async Task Create(Contact contact)
     {
-        var query = "INSERT Contact {first_name := <str>$first_name, last_name := <str>$last_name, email := <str>$email, title := <State>$title, description := <str>$description, date_of_birth := <datetime>$date_of_birth, marriage_status := <bool>$marriage_status, username := <str>$username, password := <str>$password, roles := <str>$roles}";
+        var query = "INSERT Contact {first_name := <str>$first_name, last_name := <str>$last_name, email := <str>$email, title := <State>$title, description := <str>$description, date_of_birth := <datetime>$date_of_birth, marriage_status := <bool>$marriage_status}";
         await _client.ExecuteAsync(query, new Dictionary<string, object?>
         {
                     {"first_name", contact.FirstName},
@@ -24,10 +22,7 @@ public class ContactRepository : IContactRepository
                     {"title", contact.Title},
                     {"description", contact.Description},
                     {"date_of_birth", contact.DateOfBirth},
-                    {"marriage_status", contact.MarriageStatus},
-                    {"username", contact.Username},
-                    {"password", contact.Password},
-                    {"roles", contact.Roles}
+                    {"marriage_status", contact.MarriageStatus}
         });
     }
 
@@ -74,29 +69,6 @@ public class ContactRepository : IContactRepository
                     {"date_of_birth", editContact.DateOfBirth},
                     {"marriage_status", editContact.MarriageStatus}
                 });
-    }
-
-    public async Task<Contact?> AuthenticateUser(string username, string password)
-    {
-        var query = "SELECT Contact {*} FILTER .username = <str>$username";
-        var saltParameters = new Dictionary<string, object?>
-        {
-            { "username", username }
-        };
-        Contact? user = await _client.QuerySingleAsync<Contact>(query, saltParameters);
-        if (user is not null)
-        {
-            PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(user.Password, password);
-            if (result == PasswordVerificationResult.Success)
-            {
-                return user;
-            }
-            else
-            {
-                return null;
-            }
-        }
-        return null;
     }
 }
 

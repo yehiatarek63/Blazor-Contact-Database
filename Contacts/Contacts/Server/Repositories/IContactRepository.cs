@@ -10,5 +10,4 @@ public interface IContactRepository
     Task Update(Contact editContact);
     Task Delete(Guid id);
     Task<List<Contact>> Search(string search);
-    Task<Contact?> AuthenticateUser(string username, string password);
 }
