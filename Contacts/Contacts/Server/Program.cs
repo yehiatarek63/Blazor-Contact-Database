@@ -42,7 +42,6 @@ builder.Services.AddEdgeDB(EdgeDBConnection.FromInstanceName("Contacts"), config
     config.SchemaNamingStrategy = INamingStrategy.SnakeCaseNamingStrategy;
 });
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
