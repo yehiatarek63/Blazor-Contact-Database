@@ -2,58 +2,67 @@
 @attribute [Authorize(Roles = "contact-admin")]
 @using Contacts.Shared;
 @using Microsoft.AspNet.Identity;
+@using System.Globalization;
 @inject HttpClient Http;
 @inject NavigationManager UriHelper;
+@inject IStringLocalizer<Create> L;
 
-
-
+<style>
+    .rtl {
+        display:flex;
+        justify-content: flex-end;
+    }
+    .options{
+        direction:rtl;
+    }
+</style>
 <div class="row">
-    <h1 class="text-center">New Contact</h1>
+    <h1 class="text-center">@L["new_contact"]</h1>
     <div class="col-md-6 offset-md-3">
         <EditForm Model="@_newContact" OnValidSubmit="HandleValidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="mb-3">
-                <label class="form-label" for="FirstName">First Name</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="FirstName">@L["first_name"]</label>
                 <InputText class="form-control" @bind-Value="_newContact.FirstName" id="FirstName"/>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="LastName">Last Name</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="LastName">@L["last_name"]</label>
                 <InputText class="form-control" @bind-Value="_newContact.LastName" id="LastName"/>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="Email">Email</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="Email">@L["email"]</label>
                 <InputText class="form-control" type="email" @bind-Value="_newContact.Email" id="Email"/>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="Title">Title</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="Title">@L["title"]</label>
                 <InputSelect @bind-Value="_newContact.Title" id="Title" class="form-select">
-                    <option selected>Select a title</option>
-                    <option value="Mr">Mr</option>
-                    <option value="Mrs">Mrs</option>
-                    <option value="Miss">Miss</option>
-                    <option value="Dr">Dr</option>
-                    <option value="Prof">Prof</option>
+                    <option class="@(lang=="ar" ? "options" : "")" selected>@L["select_a_title"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value="Mr">@L["mr"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value="Mrs">@L["mrs"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value="Miss">@L["miss"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value="Dr">@L["dr"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value="Prof">@L["prof"]</option>
                 </InputSelect>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="Description">Description</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="Description">@L["description"]</label>
                 <InputTextArea class="form-control" @bind-Value="_newContact.Description" id="Description"></InputTextArea>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="DateOfBirth">Date of Birth</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="DateOfBirth">@L["date_of_birth"]</label>
                 <InputDate class="form-control" @bind-Value="_newContact.DateOfBirth" id="DateOfBirth"/>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="MarriageStatus">Are you Married?</label>
+                <label class="@(lang=="ar" ? "rtl" : "") form-label" for="MarriageStatus">@L["is_married"]</label>
                 <InputSelect @bind-Value="_newContact.MarriageStatus" id="MarriageStatus" class="form-select">
-                    <option selected>Select a choice</option>
-                    <option value=true>Yes</option>
-                    <option value=false>No</option>
+                    <option class="@(lang=="ar" ? "options" : "")" selected>@L["select_a_choice"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value=false>@L["no"]</option>
+                    <option class="@(lang=="ar" ? "options" : "")" value=true>@L["yes"]</option>
                 </InputSelect>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-success mt-3">Add Contact</button>
+                <button type="submit" class="@(lang=="ar" ? "rtl" : "") btn btn-success mt-3">@L["add_contact"]</button>
             </div>
         </EditForm>
 
@@ -62,6 +71,7 @@
 
 @code {
     Contact _newContact = new Contact();
+    string lang = CultureInfo.CurrentCulture.Name.ToString();
     private async Task HandleValidSubmit()
     {
         await Http.PostAsJsonAsync<Contact>("/new-contact", _newContact);

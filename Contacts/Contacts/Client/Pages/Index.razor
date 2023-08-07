@@ -2,39 +2,48 @@
 @attribute [Authorize]
 @using Contacts.Shared;
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+@using System.Globalization;
 @inject HttpClient Http;
 @inject NavigationManager UriHelper;
+@inject IStringLocalizer<Index> L;
 
+<style>
+    .rtl {
+        direction: rtl;
+    }
+</style>
 
-<label for="Search"></label>
-<input id="Search" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="Search by FirstName, LastName or Email"/>
-<table class="table table-bordered table-striped">
+<div class=" @(lang=="ar" ? "d-flex justify-content-end" : "")">
+    <input id="Search" style="@(lang=="ar" ? "direction: rtl" : "")" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="@L["search"] @L["by"] @L["first_name"], @L["last_name"] @L["or"] @L["email"]" />
+</div>
+
+<table class="@(lang=="ar" ? "rtl" : "") table table-bordered table-striped">
     <thead>
         <tr>
             <th>
-                First Name
+                @L["first_name"]
             </th>
             <th>
-                Last Name
+                @L["last_name"]
             </th>
             <th>
-                Email
+                @L["email"]
             </th>
             <th>
-                Title
+                @L["title"]
             </th>
             <th>
-                Description
+                @L["description"]
             </th>
             <th>
-                Date of Birth
+                @L["date_of_birth"]
             </th>
             <th>
-                Is Married
+                @L["is_married"]
             </th>
             <AuthorizeView Roles="contact-admin">
                 <th>
-                    Actions
+                    @L["actions"]
                 </th>
             </AuthorizeView>
         </tr>
@@ -47,14 +56,14 @@
                     <td>@result.FirstName</td>
                     <td>@result.LastName</td>
                     <td>@result.Email</td>
-                    <td>@result.Title</td>
+                    <td>@L[@result.Title.ToString().ToLower()]</td>
                     <td>@result.Description</td>
-                    <td>@result.DateOfBirth.LocalDateTime.ToShortDateString()</td>
-                    <td>@((bool)result.MarriageStatus ? "Yes" : "No")</td>
+                    <td >&rlm;@result.DateOfBirth.DateTime.ToString("yyyy/d/MM")</td>
+                    <td >@((bool)result.MarriageStatus ? L["yes"] : L["no"])</td>
                     <AuthorizeView Roles="contact-admin">
                         <td>
-                            <a @onclick="() => NavigateToEdit(result.Id)" class="btn btn-success">Edit</a>
-                            <button class="btn btn-danger" @onclick="() => DeleteContact(result.Id)">Delete</button>
+                            <a @onclick="() => NavigateToEdit(result.Id)" class="btn btn-success">@L["edit"]</a>
+                            <button class="btn btn-danger" @onclick="() => DeleteContact(result.Id)">@L["delete"]</button>
                         </td>
                     </AuthorizeView>
                 </tr>
@@ -63,25 +72,18 @@
         else
         {
             <tr>
-                <td colspan="8">No Results</td>
+                <td  colspan="8">@L["no_results"]</td>
             </tr>
         }
     </tbody>
 </table>
 @code {
     public string SearchTerm { get; set; } = string.Empty;
-    
+    string lang = CultureInfo.CurrentCulture.Name.ToString();
     public List<Contact> AllContacts { get; set; } = new();
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            AllContacts = await Http.GetFromJsonAsync<List<Contact>>("/contacts");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message.ToString());
-        }
+        AllContacts = await Http.GetFromJsonAsync<List<Contact>>("/contacts");
     }
     private async Task Search()
     {

@@ -1,0 +1,23 @@
+{
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "title": "Title",
+  "description": "Description",
+  "date_of_birth": "Date of birth",
+  "is_married": "Married?",
+  "actions": "Actions",
+  "edit": "Edit",
+  "delete": "Delete",
+  "no_results": "No Results",
+  "yes": "Yes",
+  "no": "No",
+  "search": "Search",
+  "by": "by",
+  "or": "or",
+  "mr": "Mr",
+  "mrs": "Mrs",
+  "miss": "Miss",
+  "dr": "Dr",
+  "prof": "Prof"
+}

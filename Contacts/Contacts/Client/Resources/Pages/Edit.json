@@ -1,0 +1,20 @@
+{
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "title": "Title",
+  "description": "Description",
+  "date_of_birth": "Date of birth",
+  "is_married": "Are You Married?",
+  "actions": "Actions",
+  "yes": "Yes",
+  "no": "No",
+  "mr": "Mr",
+  "mrs": "Mrs",
+  "miss": "Miss",
+  "dr": "Dr",
+  "prof": "Prof",
+  "select_a_title": "Select a title",
+  "select_a_choice": "Select a choice",
+  "edit_contact": "Edit Contact"
+}
