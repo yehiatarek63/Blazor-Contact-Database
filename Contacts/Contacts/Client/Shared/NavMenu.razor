@@ -1,4 +1,5 @@
-﻿@inject IStringLocalizer<NavMenu> L
+﻿@using System.Globalization;
+@inject IStringLocalizer<NavMenu> L
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">@L["contacts"]</a>
@@ -27,7 +28,7 @@
 
 @code {
     private bool collapseNavMenu = true;
-
+    
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()

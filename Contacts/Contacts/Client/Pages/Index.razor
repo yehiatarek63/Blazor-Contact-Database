@@ -7,17 +7,12 @@
 @inject NavigationManager UriHelper;
 @inject IStringLocalizer<Index> L;
 
-<style>
-    .rtl {
-        direction: rtl;
-    }
-</style>
 
-<div class=" @(lang=="ar" ? "d-flex justify-content-end" : "")">
-    <input id="Search" style="@(lang=="ar" ? "direction: rtl" : "")" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="@L["search"] @L["by"] @L["first_name"], @L["last_name"] @L["or"] @L["email"]" />
+<div>
+    <input id="Search" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="@L["search"] @L["by"] @L["first_name"], @L["last_name"] @L["or"] @L["email"]" />
 </div>
 
-<table class="@(lang=="ar" ? "rtl" : "") table table-bordered table-striped">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -58,7 +53,7 @@
                     <td>@result.Email</td>
                     <td>@L[@result.Title.ToString().ToLower()]</td>
                     <td>@result.Description</td>
-                    <td >&rlm;@result.DateOfBirth.DateTime.ToString("yyyy/d/MM")</td>
+                    <td>&rlm;@result.DateOfBirth.DateTime.ToString("yyyy/d/MM")</td>
                     <td >@((bool)result.MarriageStatus ? L["yes"] : L["no"])</td>
                     <AuthorizeView Roles="contact-admin">
                         <td>
@@ -79,7 +74,6 @@
 </table>
 @code {
     public string SearchTerm { get; set; } = string.Empty;
-    string lang = CultureInfo.CurrentCulture.Name.ToString();
     public List<Contact> AllContacts { get; set; } = new();
     protected override async Task OnInitializedAsync()
     {

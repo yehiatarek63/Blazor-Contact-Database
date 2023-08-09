@@ -29,6 +29,8 @@
     <Content Remove="Resources\Pages\Index.json" />
     <Content Remove="Resources\Shared\AccessControl-ar.json" />
     <Content Remove="Resources\Shared\AccessControl.json" />
+    <Content Remove="Resources\Shared\CultureSelector-ar.json" />
+    <Content Remove="Resources\Shared\CultureSelector.json" />
     <Content Remove="Resources\Shared\MainLayout-ar.json" />
     <Content Remove="Resources\Shared\MainLayout.json" />
     <Content Remove="Resources\Shared\NavMenu-ar.json" />

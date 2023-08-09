@@ -1,7 +1,8 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Globalization;
+@inherits LayoutComponentBase
 @inject IStringLocalizer<MainLayout> L
 <link href="css/app.css" rel="stylesheet" />
-<div class="page">
+<div class="page" style="@(lang=="ar" ? "direction:rtl;" : "")">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -18,3 +19,7 @@
         </article>
     </main>
 </div>
+
+@code{
+    string lang = CultureInfo.CurrentCulture.Name.ToString();
+}

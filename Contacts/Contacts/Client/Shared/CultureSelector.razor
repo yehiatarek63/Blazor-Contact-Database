@@ -3,9 +3,10 @@
 @using System.Globalization;
 @using Microsoft.AspNetCore.Components;
 @using Microsoft.JSInterop;
+@inject IStringLocalizer<CultureSelector> L;
 
 <div class="me-auto d-flex justify-content-start">
-    <strong class="mt-2">Culture:</strong>
+    <strong class="mt-2">@L["language"]:</strong>
     <select class="form-control" @bind="Culture" style="width:100px; margin-left:10px;">
         @foreach (var culture in cultures)
         {

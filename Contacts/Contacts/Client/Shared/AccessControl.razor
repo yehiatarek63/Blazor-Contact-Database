@@ -8,14 +8,7 @@
 
 <AuthorizeView>
     <Authorized>
-        @if (CultureInfo.CurrentCulture.Name == "ar")
-        {
-            <p class="mt-3">!@context.User.Identity.Name, @L["hello"]</p>
-        }
-        else
-        {
-            <p class="mt-3">@L["hello"], @context.User.Identity.Name!</p>
-        }     
+        <p class="mt-3 m-3">@L["hello"], @context.User.Identity.Name!</p>
         <a href="#" @onclick="BeginSignOut">@L["logout"]</a>
     </Authorized>
     <NotAuthorized>
