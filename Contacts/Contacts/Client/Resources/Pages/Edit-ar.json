@@ -1,14 +1,14 @@
 {
-  "first_name": "الأسم الأول",
-  "last_name": "الأسم الأخير",
+  "first-name": "الأسم الأول",
+  "last-name": "الأسم الأخير",
   "email": "البريد الإلكتروني",
   "title": "اللقب",
   "description": "الوصف",
-  "date_of_birth": "تاريخ الميلاد",
-  "is_married": "هل أنت متزوج؟",
-  "add_contact": "أضف الاتصال",
-  "select_a_choice": "اختر",
-  "select_a_title": "اختر اللقب",
+  "date-of-birth": "تاريخ الميلاد",
+  "is-married": "هل أنت متزوج؟",
+  "add-contact": "أضف الاتصال",
+  "select-a-choice": "اختر",
+  "select-a-title": "اختر اللقب",
   "yes": "نعم",
   "no": "لا",
   "mr": "السيد",
@@ -16,5 +16,5 @@
   "miss": "الآنسة",
   "dr": "الدكتور",
   "prof": "البروفيسور",
-  "edit_contact": "تعديل الاتصال"
+  "edit-contact": "تعديل الاتصال"
 }

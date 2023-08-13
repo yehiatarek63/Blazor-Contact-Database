@@ -9,7 +9,7 @@
                 </Authorizing>
                 <NotAuthorized>
                     <h1 style="@(lang=="ar" ? "direction: rtl" : "")">@L["sorry"]</h1>
-                    <p style="@(lang=="ar" ? "direction: rtl" : "")">@L["not_authorized"]</p>
+                    <p style="@(lang=="ar" ? "direction: rtl" : "")">@L["not-authorized"]</p>
                 </NotAuthorized>
             </AuthorizeRouteView>
             <FocusOnNavigate RouteData="@routeData" Selector="h1" />
@@ -17,7 +17,7 @@
         <NotFound>
             <PageTitle>Not found</PageTitle>
             <LayoutView Layout="@typeof(MainLayout)">
-                <p role="alert">@L["not_found"]</p>
+                <p role="alert">@L["not-found"]</p>
             </LayoutView>
         </NotFound>
     </Router>

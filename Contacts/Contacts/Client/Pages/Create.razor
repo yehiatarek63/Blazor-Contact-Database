@@ -9,17 +9,17 @@
 
 
 <div class="row">
-    <h1 class="text-center">@L["new_contact"]</h1>
+    <h1 class="text-center">@L["new-contact"]</h1>
     <div class="col-md-6 offset-md-3">
         <EditForm Model="@_newContact" OnValidSubmit="HandleValidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="mb-3">
-                <label class="form-label" for="FirstName">@L["first_name"]</label>
+                <label class="form-label" for="FirstName">@L["first-name"]</label>
                 <InputText class="form-control" @bind-Value="_newContact.FirstName" id="FirstName"/>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="LastName">@L["last_name"]</label>
+                <label class="form-label" for="LastName">@L["last-name"]</label>
                 <InputText class="form-control" @bind-Value="_newContact.LastName" id="LastName"/>
             </div>
             <div class="mb-3">
@@ -29,7 +29,7 @@
             <div class="mb-3">
                 <label class="form-label" for="Title">@L["title"]</label>
                 <InputSelect @bind-Value="_newContact.Title" id="Title" class="form-select">
-                    <option selected>@L["select_a_title"]</option>
+                    <option selected>@L["select-a-title"]</option>
                     <option value="Mr">@L["mr"]</option>
                     <option value="Mrs">@L["mrs"]</option>
                     <option value="Miss">@L["miss"]</option>
@@ -42,19 +42,19 @@
                 <InputTextArea class="form-control" @bind-Value="_newContact.Description" id="Description"></InputTextArea>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="DateOfBirth">@L["date_of_birth"]</label>
+                <label class="form-label" for="DateOfBirth">@L["date-of-birth"]</label>
                 <InputDate class="form-control" @bind-Value="_newContact.DateOfBirth" id="DateOfBirth"/>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="MarriageStatus">@L["is_married"]</label>
+                <label class="form-label" for="MarriageStatus">@L["is-married"]</label>
                 <InputSelect @bind-Value="_newContact.MarriageStatus" id="MarriageStatus" class="form-select">
-                    <option selected>@L["select_a_choice"]</option>
+                    <option selected>@L["select-a-choice"]</option>
                     <option value=false>@L["no"]</option>
                     <option value=true>@L["yes"]</option>
                 </InputSelect>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-success mt-3">@L["add_contact"]</button>
+                <button type="submit" class="btn btn-success mt-3">@L["add-contact"]</button>
             </div>
         </EditForm>
 

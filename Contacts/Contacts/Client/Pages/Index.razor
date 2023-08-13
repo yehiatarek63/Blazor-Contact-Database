@@ -9,17 +9,17 @@
 
 
 <div>
-    <input id="Search" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="@L["search"] @L["by"] @L["first_name"], @L["last_name"] @L["or"] @L["email"]" />
+    <input id="Search" class="form-control w-50 mb-3" @bind="SearchTerm" @bind:event="oninput" @bind:after="() => Search()" placeholder="@L["search"] @L["by"] @L["first-name"], @L["last-name"] @L["or"] @L["email"]" />
 </div>
 
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
-                @L["first_name"]
+                @L["first-name"]
             </th>
             <th>
-                @L["last_name"]
+                @L["last-name"]
             </th>
             <th>
                 @L["email"]
@@ -31,10 +31,10 @@
                 @L["description"]
             </th>
             <th>
-                @L["date_of_birth"]
+                @L["date-of-birth"]
             </th>
             <th>
-                @L["is_married"]
+                @L["is-married"]
             </th>
             <AuthorizeView Roles="contact-admin">
                 <th>
@@ -67,7 +67,7 @@
         else
         {
             <tr>
-                <td  colspan="8">@L["no_results"]</td>
+                <td  colspan="8">@L["no-results"]</td>
             </tr>
         }
     </tbody>

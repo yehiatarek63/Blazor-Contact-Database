@@ -1,11 +1,11 @@
 {
-  "first_name": "First Name",
-  "last_name": "Last Name",
+  "first-name": "First Name",
+  "last-name": "Last Name",
   "email": "Email",
   "title": "Title",
   "description": "Description",
-  "date_of_birth": "Date of birth",
-  "is_married": "Are You Married?",
+  "date-of-birth": "Date of birth",
+  "is-married": "Are You Married?",
   "actions": "Actions",
   "yes": "Yes",
   "no": "No",
@@ -14,8 +14,8 @@
   "miss": "Miss",
   "dr": "Dr",
   "prof": "Prof",
-  "new_contact": "New Contact",
-  "select_a_title": "Select a title",
-  "select_a_choice": "Select a choice",
-  "add_contact": "Add Contact"
+  "new-contact": "New Contact",
+  "select-a-title": "Select a title",
+  "select-a-choice": "Select a choice",
+  "add-contact": "Add Contact"
 }

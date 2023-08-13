@@ -1,6 +1,6 @@
 {
   "state": "Determining state session please wait...",
   "sorry": "Sorry",
-  "not_authorized": "You are not authorized to view this page, please log in",
-  "not_found": "No content found at this address"
+  "not-authorized": "You are not authorized to view this page, please log in",
+  "not-found": "No content found at this address"
 }
